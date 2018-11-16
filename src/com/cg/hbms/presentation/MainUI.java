@@ -24,16 +24,22 @@ public class MainUI {
 			System.out.println("Select your option");
 			System.out.println("[1]. Login" + "\n" + "[2]. Exit");
 			try {
-				choice = 1;//scanner.nextInt();
+				//choice = 1; 
+				choice= scanner.nextInt();
 			} catch (InputMismatchException e) {
 				System.err.println("Enter digits only(1-2)");
 			}
 			switch (choice) {
 			case 1:
+				//scanner.next();
 				System.out.print("UserName? ");
-				String userName = "Admin"; //scanner.next();
+				//String userName = "Admin"; 
+				//scanner.next();
+				String userName = scanner.next();
 				System.out.print("Password? ");
-				String password = "123"; //scanner.next();
+				//String password = "123"; 
+				//scanner.next();
+				String password = scanner.next();
 				loginAttempts++;
 				try {
 					String role = service.getRole(userName,password);
@@ -42,6 +48,11 @@ public class MainUI {
 						AdminConsole console = new AdminConsole();
 						console.start(userName);
 					}
+					else if(role.equals("Employee")){
+						EmployeeConsole console = new EmployeeConsole();
+						console.start(userName);
+					}
+					
 				} catch (HMSExceptions e) {
 					System.err.println(e.getMessage());
 				}
